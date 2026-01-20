@@ -81,8 +81,73 @@
         .form-group { text-align: left; margin-bottom: 20px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333; }
         input, select, textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; color: #333; font-family: inherit; }
-        .btn-submit { width: 100%; padding: 22px; background: var(--primary); color: #fff; border: none; border-radius: 12px; font-size: 1.4rem; font-weight: 900; cursor: pointer; margin-top: 10px; }
         
+        .btn-submit {
+            position: relative;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            font-size: 1.6rem;
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        .btn-submit::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: none;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -60%; }
+            20% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        .btn-submit:hover {
+            background: var(--accent);
+            color: #0f172a;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-sub-text {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.8;
+            letter-spacing: -0.5px;
+        }
+
         .step-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; }
         .step-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; display: flex; align-items: center; gap: 20px; text-align: left; transition: 0.3s; }
         .step-box:hover { border-color: var(--accent); transform: translateX(10px); }
@@ -115,7 +180,6 @@
             .profile-img { width: 180px; height: 230px;}
         }
 
-/* 개인정보 수집 동의 관련 스타일 */
 .privacy-box { 
     background: #f8fafc; 
     border: 1px solid #e2e8f0; 
@@ -138,38 +202,27 @@
     cursor: pointer; 
 }
 .privacy-agree input { width: 20px; height: 20px; cursor: pointer; }
-.btn-submit:disabled { background: #cbd5e1; cursor: not-allowed; }
 
-/* 입력 필드 간격 확보 */
 .field {
   display: block;
-  margin-bottom: 18px;    /* 입력칸 사이 간격 */
+  margin-bottom: 18px;
 }
 
-/* 입력칸 높이 조절 */
 .field input,
 .field textarea {
-  padding: 10px 12px;     /* 높이 ↓ */
-  line-height: 1.4;      /* 글자 밀도 정상화 */
+  padding: 10px 12px;
+  line-height: 1.4;
   font-size: 15px;
   box-sizing: border-box;
 }
 
-/* textarea는 조금 넉넉하게 */
 .field textarea {
   min-height: 120px;
 }
 
-/* 개인정보 박스와 입력칸 사이 간격 */
 .form-group {
   margin-top: 24px;
 }
-
-/* 버튼 위 여백 */
-.btn-submit {
-  margin-top: 28px;
-}
-
 
 .hero {
   position: relative;
@@ -185,7 +238,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* 핵심 */
+  object-fit: cover;
   z-index: 1;
 }
 
@@ -214,7 +267,7 @@
 
 .stat-value {
   display: inline-flex;
-  align-items: baseline;   /* 🔥 숫자·단위 기준선 통일 */
+  align-items: baseline;
   gap: 2px;
 }
 
@@ -226,7 +279,7 @@
 }
 
 .unit {
-  font-size: 1.2rem;        /* 숫자보다 살짝 작게 */
+  font-size: 1.2rem;
   font-weight: 800;
   color: #c5a059;
   line-height: 1;
@@ -238,7 +291,6 @@
   font-size: 0.85rem;
   color: #9ca3af;
 }
-
 
     </style>
 </head>
@@ -296,7 +348,7 @@
         <div class="problem-block">
             <div class="img-area"><img src="사례1_영끌.png" alt="30대 영끌"></div>
             <h3 style="color:var(--danger)">사례 1: "내 집 마련이 지옥이 될 줄 몰랐습니다" (30대 A씨)</h3>
-            <p>"지금 안 사면 끝"이라는 공포에 휩쓸려 계약한 A씨. 입주 시점에 금리가 폭등하자 전세가는 반토막 났고, 매달 300만 원의 이자를 감당 못 해 <strong>원금에서 1억 원을 손해 보고 손절</strong>했습니다.</p>
+            <p>"지금 안 사면 끝"이라는 공포에 휩쓸려 계약한 A씨. 입주 시점에 금리가 폭등하자 전세가는 반토막 났고, 매달 300만 원의 이자가 감당 못 해 <strong>원금에서 1억 원을 손해 보고 손절</strong>했습니다.</p>
         </div>
         <div class="problem-block">
             <div class="img-area"><img src="사례2_미분양.png" alt="50대 미분양"></div>
@@ -595,14 +647,14 @@ action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMB
       method="POST" 
         target="hidden_iframe"
         accept-charset="UTF-8"
-        onsubmit="submitted=true;">
+        onsubmit="return validateForm();">
 
     <label class="field">
           <span class="label">성함 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
                name="entry.1233337071"
-               placeholder="성함을 입력해주세요"
-               required>
+               id="name"
+               placeholder="성함을 입력해주세요">
       <i class="underline"></i>
         </label>
 
@@ -613,8 +665,7 @@ action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMB
                id="phone"
                placeholder="010-0000-0000"
                oninput="formatPhoneNumber(this)"
-               maxlength="13"
-               required>
+               maxlength="13">
           <i class="underline"></i>
         </label>
 
@@ -622,15 +673,17 @@ action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMB
           <span class="label">관심 단지/지역 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
                name="entry.592504980"
-               placeholder="예: 해링턴플레이스 풍무, 과천지역, 신축 분양 등" required>
+               id="interest"
+               placeholder="예: 해링턴플레이스 풍무, 과천지역, 신축 분양 등">
           <i class="underline"></i>
         </label>
 
     <label class="field">
           <span class="label">가용 자금 범위 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
-name="entry.1513970480"
-               placeholder="예: 1억, 2억, 5억 등" required>
+               name="entry.1513970480"
+               id="budget"
+               placeholder="예: 1억, 2억, 5억 등">
           <i class="underline"></i>
         </label>
 
@@ -654,7 +707,7 @@ name="entry.1513970480"
 동의하시는 경우, 체크박스를 클릭해주십시오
         </div>
         <label class="privacy-agree">
-            <input type="checkbox" id="agree_chk" required> <span>체크박스로 동의합니다</span>
+            <input type="checkbox" id="agree_chk"> <span>체크박스로 동의합니다</span>
         </label>
     </div>
 
@@ -662,7 +715,10 @@ name="entry.1513970480"
         <input type="hidden" name="pageHistory" value="0">
         <input type="hidden" name="submit" value="Submit">
 
-    <button type="submit" id="submit_btn" class="btn-submit" disabled>무료 상담 신청하기</button>
+    <button type="submit" id="submit_btn" class="btn-submit">
+        <span class="btn-main-text">지금 바로 무료 상담 신청하기</span>
+        <span class="btn-sub-text">부담 없는 0원 상담, 영업 전화가 아닌 정보를 드립니다</span>
+    </button>
 </form>
 
       <p id="msg" class="msg" aria-live="polite"></p>
@@ -681,8 +737,6 @@ name="entry.1513970480"
 
 <script>
     
-    document.getElementById('gForm').onsubmit = function() { submitted = true; };
-
     const observerOptions = { threshold: 0.1 };
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -730,17 +784,22 @@ name="entry.1513970480"
     }
     startTimer();
 
-// 체크박스 상태에 따라 버튼 활성화/비활성화 제어
-const agreeChk = document.getElementById('agree_chk');
-const submitBtn = document.getElementById('submit_btn');
+function validateForm() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const interest = document.getElementById('interest').value.trim();
+    const budget = document.getElementById('budget').value.trim();
+    const agree = document.getElementById('agree_chk').checked;
 
-agreeChk.addEventListener('change', function() {
-    if (this.checked) {
-        submitBtn.disabled = false;
-    } else {
-        submitBtn.disabled = true;
-    }
-});
+    if (!name) { alert('성함을 입력해주세요.'); return false; }
+    if (!phone) { alert('연락처를 입력해주세요.'); return false; }
+    if (!interest) { alert('관심 단지/지역을 입력해주세요.'); return false; }
+    if (!budget) { alert('가용 자금 범위를 입력해주세요.'); return false; }
+    if (!agree) { alert('개인정보 수집 및 이용에 동의하셔야 신청이 가능합니다.'); return false; }
+
+    submitted = true;
+    return true;
+}
 
 function formatPhoneNumber(target) {
     let val = target.value.replace(/\D/g, "");
@@ -831,4 +890,3 @@ function formatPhoneNumber(target) {
 
 </body>
 </html>
-```#부동산 #내집마련 #공인중개사 #투자전략 #집현전
