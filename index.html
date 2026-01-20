@@ -59,6 +59,7 @@
 
         .authority-box { background: #111; color: #fff; border-radius: 40px; padding: clamp(30px, 5vw, 60px); margin-top: 40px; text-align: left; }
         .auth-ribbon { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 30px; margin-bottom: 40px; text-align: center; gap: 10px; }
+        .ribbon-item { flex: 1; }
         .ribbon-item .val { display: block; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; color: var(--accent); }
         .ribbon-item .lbl { font-size: 0.8rem; color: #888; }
         
@@ -142,13 +143,13 @@
 /* 입력 필드 간격 확보 */
 .field {
   display: block;
-  margin-bottom: 18px;   /* 입력칸 사이 간격 */
+  margin-bottom: 18px;    /* 입력칸 사이 간격 */
 }
 
 /* 입력칸 높이 조절 */
 .field input,
 .field textarea {
-  padding: 10px 12px;    /* 높이 ↓ */
+  padding: 10px 12px;     /* 높이 ↓ */
   line-height: 1.4;      /* 글자 밀도 정상화 */
   font-size: 15px;
   box-sizing: border-box;
@@ -201,13 +202,49 @@
   padding: 120px 20px;
 }
 
+.val.bump {
+  animation: bump 0.35s ease-out;
+}
+
+@keyframes bump {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.stat-value {
+  display: inline-flex;
+  align-items: baseline;   /* 🔥 숫자·단위 기준선 통일 */
+  gap: 2px;
+}
+
+.val {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #c5a059;
+  line-height: 1;
+}
+
+.unit {
+  font-size: 1.2rem;        /* 숫자보다 살짝 작게 */
+  font-weight: 800;
+  color: #c5a059;
+  line-height: 1;
+}
+
+.lbl {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
 
     </style>
 </head>
 <body>
 
 <header class="hero">
-  <!-- 배경 영상 -->
   <video class="hero-video"
          autoplay
          muted
@@ -216,10 +253,8 @@
     <source src="sseoul.mp4" type="video/mp4">
   </video>
 
-  <!-- 어두운 오버레이 -->
   <div class="hero-overlay"></div>
 
-  <!-- 텍스트만 container 안 -->
   <div class="container text-center hero-content reveal">
     <h1>실패 없는<br> '내집마련 비법'</h1>
     <div class="slogan-box reveal">
@@ -252,7 +287,7 @@
         </div>
         <div class="down-arrow">↓</div>
         <div class="advice-block">
-            주변에 물어봐도 돌아오는 건<br> "그냥 사지 마" 혹은 "무조건 사"<br>라는 무책임한 조언뿐입니다.
+             주변에 물어봐도 돌아오는 건<br> "그냥 사지 마" 혹은 "무조건 사"<br>라는 무책임한 조언뿐입니다.
         </div>
     </section>
 
@@ -378,18 +413,45 @@
             </p>
         </div>
 
-        <div class="authority-box">
-            <div class="auth-ribbon">
-                <div class="ribbon-item"><span class="val">10년+</span><span class="lbl">부동산 실무 경력</span></div>
-                <div class="ribbon-item"><span class="val">2,000회+</span><span class="lbl">누적 상담 횟수</span></div>
-                <div class="ribbon-item"><span class="val">1,000회+</span><span class="lbl">경매·입찰·분양·중개</span></div>
-                <div class="ribbon-item"><span class="val">2,000억+</span><span class="lbl">누적 거래 가액</span></div>
-            </div>
-            <div class="profile-area">
+<div class="authority-box">
+
+  <div class="auth-ribbon">
+    <div class="ribbon-item">
+  <div class="stat-value">
+      <span class="val" data-count="10">0</span>
+  <span class="unit">년+</span>
+    </div>
+      <span class="lbl">부동산 실무 경력</span>
+    </div>
+
+    <div class="ribbon-item">
+  <div class="stat-value">
+      <span class="val" data-count="2000">0</span>
+   <span class="unit">회+</span>
+    </div>
+     <span class="lbl">누적 상담 횟수</span>
+    </div>
+
+    <div class="ribbon-item">
+  <div class="stat-value">
+      <span class="val" data-count="1000">0</span>
+   <span class="unit">회+</span>
+    </div>
+      <span class="lbl">경매·입찰·분양·중개</span>
+    </div>
+
+    <div class="ribbon-item">
+  <div class="stat-value">
+      <span class="val" data-count="2000">0</span>
+   <span class="unit">억+</span>
+    </div>
+      <span class="lbl">누적 거래 가액</span>
+    </div>
+  </div>            <div class="profile-area">
                 <img src="대표사진.jpg" alt="이광철 대표" class="profile-img">
                 <div class="profile-info">
                     <span class="badge">국가공인 공인중개사</span>
-                    <h2 style="color:#fff; margin-bottom:15px;">이   광   철 <span style="font-size:1.1rem; font-weight:normal; color:#aaa;">대표공인중개사 </span></h2>
+                    <h2 style="color:#fff; margin-bottom:15px;">이&nbsp;&nbsp;&nbsp;광&nbsp;&nbsp;&nbsp;철 <span style="font-size:1.1rem; font-weight:normal; color:#aaa;">대표공인중개사 </span></h2>
                     <p style="color:#ccc; font-size:1.05rem; line-height:1.8;">
                         "돈은 벌어야 하지만 판단이 어려운 시대입니다. <br>
                         <strong>'지금 사라'가 아니라, '무엇을 보아야 하는지'</strong>를 설명합니다."
@@ -511,7 +573,7 @@
             </ul>
             <div class="timer-area">
                 현재 <span style="color:#ef4444; font-size:1.4rem;">남은 인원: <span class="blink">2명</span></span> | 
-                마감까지: <span id="countdown" style="color:var(--accent);">00:00:00</span> 남음
+                마감까지: <span id="countdown_timer" style="color:var(--accent); font-family: 'Courier New', Courier, monospace;">00:00:00:00</span> 남음
             </div>
         </div>
     </section>
@@ -529,16 +591,14 @@
 
 
 <form id="gForm"
-
 action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMBu0cw855YA2ReFMjxfQ/formResponse" 
       method="POST" 
         target="hidden_iframe"
         accept-charset="UTF-8"
         onsubmit="submitted=true;">
 
-    <!-- 성함 -->
-        <label class="field">
-          <span class="label">성함</span>
+    <label class="field">
+          <span class="label">성함 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
                name="entry.1233337071"
                placeholder="성함을 입력해주세요"
@@ -546,29 +606,28 @@ action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMB
       <i class="underline"></i>
         </label>
 
-    <!-- 연락처 -->
-        <label class="field">
-          <span class="label">연락처</span>
+    <label class="field">
+          <span class="label">연락처 <span style="color:var(--danger)">(필수)</span></span>
         <input type="tel"
                name="entry.1556671246"
+               id="phone"
                placeholder="010-0000-0000"
-pattern="^(01[016789]|02|0[3-9][0-9])[- ]?\d{3,4}[- ]?\d{4}$"
+               oninput="formatPhoneNumber(this)"
+               maxlength="13"
                required>
           <i class="underline"></i>
         </label>
 
-    <!-- 관심 단지/지역 -->
-      <label class="field">
-          <span class="label">관심 단지/지역</span>
+    <label class="field">
+          <span class="label">관심 단지/지역 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
                name="entry.592504980"
                placeholder="예: 해링턴플레이스 풍무, 과천지역, 신축 분양 등" required>
           <i class="underline"></i>
         </label>
 
-    <!-- 가용 자금 범위 -->
-      <label class="field">
-          <span class="label">가용 자금 범위</span>
+    <label class="field">
+          <span class="label">가용 자금 범위 <span style="color:var(--danger)">(필수)</span></span>
         <input type="text"
 name="entry.1513970480"
                placeholder="예: 1억, 2억, 5억 등" required>
@@ -576,8 +635,7 @@ name="entry.1513970480"
         </label>
 
 
-    <!-- 상담 희망 내용 -->
-   <label class="field">
+    <label class="field">
           <span class="label">상담 희망 내용</span>
         <textarea name="entry.1934433179"
                   rows="5"
@@ -586,7 +644,7 @@ name="entry.1513970480"
         </label>
 
     <div class="form-group">
-        <label style="display:block; font-weight:bold; margin-bottom:8px;">개인정보 수집 및 이용 동의</label>
+        <label style="display:block; font-weight:bold; margin-bottom:8px;">개인정보 수집 및 이용 동의 <span style="color:var(--danger)">(필수)</span></label>
         <div class="privacy-box">
             상담 안내 및 서비스 제공을 위해 아래와 같이 최소한의 개인정보를 수집하며, 목적 외 사용이나 제3자 제공은 없습니다.<br><br>
             <strong>1. 개인정보의 수집 이용 목적:</strong> 파일 링크 전송 및 상담 안내<br>
@@ -600,7 +658,6 @@ name="entry.1513970480"
         </label>
     </div>
 
-        <!-- 안정화 hidden 필드 -->
         <input type="hidden" name="fvv" value="1">
         <input type="hidden" name="pageHistory" value="0">
         <input type="hidden" name="submit" value="Submit">
@@ -623,18 +680,19 @@ name="entry.1513970480"
 </footer>
 
 <script>
-    var submitted = false;
+    
     document.getElementById('gForm').onsubmit = function() { submitted = true; };
 
     const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
     }, observerOptions);
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
 
     function getWeekOfMonth() {
         const now = new Date();
@@ -647,17 +705,28 @@ name="entry.1513970480"
     getWeekOfMonth();
 
     function startTimer() {
-        const countdownEl = document.getElementById('countdown');
+        const countdownEl = document.getElementById('countdown_timer');
         if(!countdownEl) return;
-        setInterval(() => {
+        
+        function update() {
             const now = new Date();
             const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
             const diff = tomorrow - now;
+            
+            if (diff <= 0) {
+                countdownEl.innerText = "00:00:00:00";
+                return;
+            }
+
             const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
             const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
             const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-            countdownEl.innerText = `${hours}:${minutes}:${seconds}`;
-        }, 1000);
+            const ms = String(Math.floor((diff % 1000) / 10)).padStart(2, '0');
+            
+            countdownEl.innerText = `${hours}:${minutes}:${seconds}:${ms}`;
+            requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
     }
     startTimer();
 
@@ -673,7 +742,93 @@ agreeChk.addEventListener('change', function() {
     }
 });
 
+function formatPhoneNumber(target) {
+    let val = target.value.replace(/\D/g, "");
+    let length = val.length;
+    let result = "";
+
+    if (length < 4) {
+        result = val;
+    } else if (length < 7) {
+        result = val.substring(0, 3) + "-" + val.substring(3);
+    } else if (length < 11) {
+        result = val.substring(0, 3) + "-" + val.substring(3, 6) + "-" + val.substring(6);
+    } else {
+        result = val.substring(0, 3) + "-" + val.substring(3, 7) + "-" + val.substring(7);
+    }
+    target.value = result;
+}
+
 </script>
+
+
+
+<script>
+  let slotStarted = false;
+
+  function startSlotMachineLoop() {
+    const els = document.querySelectorAll('.val[data-count]');
+    const items = [];
+
+    els.forEach(el => {
+      items.push({
+        el,
+        final: parseInt(el.dataset.count, 10)
+      });
+    });
+
+    function run() {
+      const duration = 1200;
+      const start = performance.now();
+
+      function animate(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out
+
+        items.forEach(item => {
+          const value = Math.floor(item.final * eased);
+          item.el.textContent = value.toLocaleString();
+        });
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // 숫자 도착 시 살짝 튀는 효과
+          items.forEach(item => {
+            item.el.classList.add('bump');
+            setTimeout(() => item.el.classList.remove('bump'), 350);
+          });
+
+          // 2초 멈췄다가 다시
+          setTimeout(run, 2000);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    run();
+  }
+
+  /* 🔍 슬롯 숫자 영역이 화면에 들어오면 시작 */
+  const slotObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !slotStarted) {
+        slotStarted = true;
+        startSlotMachineLoop();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  /* 🎯 바로 여기 */
+  const target = document.querySelector('.auth-ribbon');
+  if (target) {
+    slotObserver.observe(target);
+  }
+</script>
+
+
 
 </body>
 </html>
+```#부동산 #내집마련 #공인중개사 #투자전략 #집현전
