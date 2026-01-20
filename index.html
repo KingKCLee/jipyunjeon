@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH집현전 | 실패 없는 내 집 마련 비밀 로드맵</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #c5a059;
+            --danger: #ef4444;
+            --bg-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; color: #334155; word-break: keep-all; }
+        
+        /* 애니메이션 초기 상태 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        .inner-section { padding: 80px 0; border-bottom: 1px solid #e2e8f0; }
+        .text-center { text-align: center; }
+        .highlight { color: var(--accent); font-weight: 800; }
+        
+        header { 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover; background-position: center; color: #fff; padding: 120px 20px; text-align: center;
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 30px; letter-spacing: -0.05em; }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: 30px; color: var(--primary); }
+        h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; color: var(--primary); }
+        p { margin-bottom: 20px; font-size: 1.15rem; color: #475569; }
+
+        .slogan-box { 
+            display: inline-block; 
+            background-color: var(--primary); 
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .slogan-box p { margin-bottom: 0; color: #fff; font-size: clamp(1rem, 3vw, 1.3rem); }
+
+        .problem-block { background: var(--bg-light); border-radius: 30px; padding: 40px; margin-bottom: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 20px rgba(0,0,0,0.03); }
+        .img-area { width: 100%; height: 400px; background: #f1f5f9; border-radius: 15px; margin-bottom: 20px; overflow: hidden; position: relative; }
+        .img-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* 화살표 간격: 너무 좁지도 넓지도 않게 조정 (상하 30px) */
+        .down-arrow { font-size: 3rem; color: var(--accent); margin: 30px 0; display: block; line-height: 1; }
+        
+        .advice-block { background: #fff; border: 2px dashed var(--danger); border-radius: 20px; padding: 30px; color: var(--danger); font-weight: 700; font-size: 1.3rem; }
+        .effort-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 20px; padding: 30px; margin-bottom: 20px; text-align: left; }
+        .process-card { background: #fff; border: 2px solid var(--primary); padding: 40px; border-radius: 25px; margin-bottom: 30px; box-shadow: 10px 10px 0 var(--bg-light); }
+        .process-card h3 { margin-top: 0; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+
+        .authority-box { background: #111; color: #fff; border-radius: 40px; padding: clamp(30px, 5vw, 60px); margin-top: 40px; text-align: left; }
+        .auth-ribbon { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 30px; margin-bottom: 40px; text-align: center; gap: 10px; }
+        .ribbon-item .val { display: block; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900; color: var(--accent); }
+        .ribbon-item .lbl { font-size: 0.8rem; color: #888; }
+        
+        .profile-area { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 40px; }
+        .profile-img { width: 220px; height: 280px; object-fit: cover; border-radius: 20px; border: 2px solid var(--accent); flex-shrink: 0; }
+        .profile-info { flex: 1; }
+        .badge { display: inline-block; background: var(--accent); color: #000; padding: 4px 12px; border-radius: 4px; font-weight: 800; font-size: 0.9rem; margin-bottom: 15px; }
+        
+        .credentials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+        .credential-card { background: #222; padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between; }
+        .credential-card img { width: 100%; height: auto; max-height: 200px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
+        .credential-card .title { color: var(--accent); font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; }
+        .credential-card .desc { font-size: 0.85rem; color: #ccc; line-height: 1.6; }
+
+        .faq-box { background: var(--primary); color: #fff; padding: 50px; border-radius: 30px; margin: 60px 0; }
+        .faq-q { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
+        
+        .form-wrap { background: #fff; border: 3px solid var(--primary); padding: clamp(30px, 8vw, 60px); border-radius: 40px; box-shadow: 20px 20px 0 var(--accent); margin-top: 40px; }
+        .form-group { text-align: left; margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333; }
+        input, select, textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; color: #333; font-family: inherit; }
+        .btn-submit { width: 100%; padding: 22px; background: var(--primary); color: #fff; border: none; border-radius: 12px; font-size: 1.4rem; font-weight: 900; cursor: pointer; margin-top: 10px; }
+        
+        .step-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; }
+        .step-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; display: flex; align-items: center; gap: 20px; text-align: left; transition: 0.3s; }
+        .step-box:hover { border-color: var(--accent); transform: translateX(10px); }
+        .step-num { background: var(--primary); color: #fff; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; }
+        .step-content h3 { margin-bottom: 5px; font-size: 1.2rem; }
+        .step-content p { margin-bottom: 0; font-size: 1rem; }
+
+        .benefit-highlight-box { 
+            background: linear-gradient(145deg, #1e293b, #0f172a); color: #fff; padding: 40px; border-radius: 35px; 
+            border: 2px solid var(--accent); text-align: center; position: relative; overflow: hidden; margin-top: 30px;
+        }
+        .benefit-tag { position: absolute; top: 20px; right: -35px; background: var(--danger); color: #fff; padding: 5px 40px; transform: rotate(45deg); font-weight: 900; font-size: 0.8rem; }
+        .limit-text { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; display: block; }
+        .benefit-list { text-align: left; display: inline-block; margin: 20px 0; padding: 0; list-style: none; }
+        .benefit-list li { margin-bottom: 12px; font-size: 1.1rem; }
+        .benefit-list li::before { content: '✓'; color: var(--accent); margin-right: 12px; font-weight: 900; }
+        .timer-area { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-top: 15px; border: 1px dashed rgba(197, 160, 89, 0.3); font-weight: 700; }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .blink { animation: blink 0.8s infinite; }
+
+        footer { background: var(--primary); color: #fff; padding: 60px 20px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .profile-area { flex-direction: column; align-items: center; text-align: center; }
+            .credentials-grid { grid-template-columns: 1fr; }
+            .auth-ribbon { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            h1 { font-size: 1.8rem; }
+            .form-wrap { padding: 25px; box-shadow: 10px 10px 0 var(--accent); }
+            .profile-img { width: 180px; height: 230px;}
+        }
+
+/* 개인정보 수집 동의 관련 스타일 */
+.privacy-box { 
+    background: #f8fafc; 
+    border: 1px solid #e2e8f0; 
+    padding: 15px; 
+    border-radius: 8px; 
+    font-size: 0.85rem; 
+    color: #64748b; 
+    margin-bottom: 15px; 
+    text-align: left; 
+    height: 120px; 
+    overflow-y: scroll; 
+}
+.privacy-agree { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-weight: bold; 
+    font-size: 0.95rem; 
+    margin-bottom: 20px; 
+    cursor: pointer; 
+}
+.privacy-agree input { width: 20px; height: 20px; cursor: pointer; }
+.btn-submit:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container text-center reveal">
+        <h1>실패 없는<br> '내집마련 비법'</h1>
+        <div class="slogan-box reveal">
+            <p>당신의 소중한 자산을 지키는 동행 파트너, <span class="highlight">집현전</span>이 답해드립니다.</p>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <section class="inner-section text-center reveal">
+        <h2>집은 사고 싶은데,<br>이런 문제 있으시죠?</h2>
+        <div class="problem-block">
+            <div class="img-area"><img src="정보의바다.png" alt="정보 과잉"></div>
+            <h3>첫째, 정보가 너무 많습니다.</h3>
+            <p>유튜브와 블로그 정보는 넘쳐나지만, 그건 불특정 다수를 위한 정보일 뿐입니다. <br>정작 '나의 자산 상황'에 맞는 집이 어디인지 알 길이 없습니다.</p>
+        </div>
+        <div class="problem-block">
+            <div class="img-area"><img src="꼭대기불안.png" alt="입지 불안"></div>
+            <h3>둘째, 입지 판단이 불안합니다.</h3>
+            <p>"여기가 저평가다"라는 말은 무성하지만, <br>혹시나 내가 상꼭대기에 물려서 전 재산을 날리는 건 아닌지 밤잠을 설칩니다.</p>
+        </div>
+        <div class="problem-block">
+            <div class="img-area"><img src="복잡한서류.png" alt="자금 막막"></div>
+            <h3>셋째, 자금 계획이 막막합니다.</h3>
+            <p>대출 규제는 매달 바뀌고, 내 수입이 예기치 않게 끊겼을 때 <br>감당할 수 있는 선이 어디까지인지 계산이 서질 않습니다.</p>
+        </div>
+        <div class="down-arrow">↓</div>
+        <div class="advice-block">
+            주변에 물어봐도 돌아오는 건<br> "그냥 사지 마" 혹은 "무조건 사"<br>라는 무책임한 조언뿐입니다.
+        </div>
+    </section>
+
+    <section class="inner-section reveal">
+        <h2 class="text-center">혼자 고민하다 내린 잘못된 결정,<br><span style="color:var(--danger)">그 비극적인 실제 사연</span></h2>
+        <div class="problem-block">
+            <div class="img-area"><img src="사례1_영끌.png" alt="30대 영끌"></div>
+            <h3 style="color:var(--danger)">사례 1: "내 집 마련이 지옥이 될 줄 몰랐습니다" (30대 A씨)</h3>
+            <p>"지금 안 사면 끝"이라는 공포에 휩쓸려 계약한 A씨. 입주 시점에 금리가 폭등하자 전세가는 반토막 났고, 매달 300만 원의 이자를 감당 못 해 <strong>원금에서 1억 원을 손해 보고 손절</strong>했습니다.</p>
+        </div>
+        <div class="problem-block">
+            <div class="img-area"><img src="사례2_미분양.png" alt="50대 미분양"></div>
+            <h3 style="color:var(--danger)">사례 2: "노후 자금이 족쇄가 되었습니다" (50대 B씨)</h3>
+            <p>"미분양이니까 무조건 오른다"는 말만 믿고 산 B씨. 하지만 인프라 계획이 전무한 곳이었고, 5년째 집값은 제자리입니다. 팔리지도 않는 <strong>'콘크리트 족쇄'</strong>가 되어 노후를 압박하고 있습니다.</p>
+        </div>
+    </section>
+
+    <section class="inner-section reveal" style="background-color: #f1f5f9; border-radius: 50px; padding: 60px 40px; margin-top: 50px;">
+        <h2 class="text-center">"나름대로 최선을 다하고 계시다는 것,<br>잘 알고 있습니다"</h2>
+        <p class="text-center">하지만 당신이 쏟아부은 이 노력들이 정말 정답이었을까요?</p>
+        <div class="effort-card">
+            <h3>01. 매일 3시간씩 부동산 유튜브 시청</h3>
+            <p>강의를 섭렵하지만 정보가 파편화되어 있습니다. "그래서 내 통장 사정으로 어디를 사야 해?"라는 질문엔 누구도 답해주지 않습니다.</p>
+        </div>
+        <div class="effort-card">
+            <h3>02. 주말을 반납한 무료 단체 임장</h3>
+            <p>크루를 따라 현장을 돌지만, 강사는 당신의 개인적인 내집마련 계획을 모릅니다. 모두에게 좋은 입지가 당신에게도 정답은 아닙니다.</p>
+        </div>
+        <div class="effort-card">
+            <h3>03. 단톡방 '카더라' 통신과 지인 조언</h3>
+            <p>고수들의 말에 심장이 뛰지만, 기억하세요. 그들은 당신의 손실을 단 1원도 책임져주지 않는 타인일 뿐입니다.</p>
+        </div>
+        <div class="effort-card">
+            <h3>04. 네이버 부동산 매일 새로고침</h3>
+            <p>호가에 일희일비하며 시간만 보냅니다. 시간은 계속 흐르는데 결정은 점점 더 힘들어지고 무력감만 커집니다.</p>
+        </div>
+        <div class="effort-card">
+            <h3>05. 모델하우스 영업사원의 브리핑</h3>
+            <p>"딱 하나 남았다"는 화법에 혹하는 순간 객관적 판단은 사라집니다. 그들의 목적은 당신의 자산 증식이 아닌 '계약서 서명'입니다.</p>
+        </div>
+        <div class="text-center" style="width: 100%; max-width: 800px; margin: 0 auto;">
+            <div class="down-arrow">↓</div>
+            <div class="advice-block" style="background: var(--primary); color: #ffffff; border: none; text-align: left;">
+                <p style="margin-bottom: 0; color: #ffffff; word-break: keep-all;">
+                    이 모든 노력에도 성과가 없는 이유는 단 하나입니다. 그것은 본질적인 한계입니다. <br><br>즉, 정보는 많지만, 그 정보를 당신의 상황에 맞게 필터링해 줄 <strong style="color: var(--accent);">'검증된 전문가'</strong>가 당신 편에 없기 때문입니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="inner-section text-center reveal" style="border-bottom: none; padding-top: 60px;">
+        <p style="font-size: 1.35rem; color: var(--primary); font-weight: 700; margin-bottom: 25px;">
+            이 모든 것을 조합해 줄 <span class="highlight">전문가 인맥</span>이 당신 곁에 있습니까?
+        </p>
+        <div style="max-width: 750px; margin: 0 auto; padding: 40px; border-radius: 20px; background: #fdfbf7; border: 1px solid #f1e6d0; text-align: left; box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.05);">
+            <p style="margin-bottom: 0; font-size: 1.2rem; color: #334155; line-height: 1.9;">
+                인생의 큰 결정마다 언제든 전화를 걸어 내 가족처럼 조언해 줄 <br>
+                <strong style="color: var(--primary); font-size: 1.25rem; border-bottom: 2px solid var(--accent);">실력 있는 공인중개사가 단 한 명이라도 있다면,</strong> <br>
+                당신의 자산은 결코 흔들리지 않습니다.
+            </p>
+        </div>
+
+        <div class="authority-box">
+            <div class="auth-ribbon">
+                <div class="ribbon-item"><span class="val">10년+</span><span class="lbl">부동산 실무 경력</span></div>
+                <div class="ribbon-item"><span class="val">2,000회+</span><span class="lbl">누적 상담 횟수</span></div>
+                <div class="ribbon-item"><span class="val">1,000회+</span><span class="lbl">경매·입찰·분양·중개</span></div>
+                <div class="ribbon-item"><span class="val">2,000억+</span><span class="lbl">누적 거래 가액</span></div>
+            </div>
+            <div class="profile-area">
+                <img src="대표사진.jpg" alt="이광철 대표" class="profile-img">
+                <div class="profile-info">
+                    <span class="badge">국가공인 공인중개사</span>
+                    <h2 style="color:#fff; margin-bottom:15px;">이   광   철 <span style="font-size:1.1rem; font-weight:normal; color:#aaa;">대표공인중개사 </span></h2>
+                    <p style="color:#ccc; font-size:1.05rem; line-height:1.8;">
+                        "돈은 벌어야 하지만 판단이 어려운 시대입니다. <br>
+                        <strong>'지금 사라'가 아니라, '무엇을 보아야 하는지'</strong>를 설명합니다."
+                    </p>
+                    <p style="color:#888; font-size:0.85rem; margin-top:10px;">
+                        공인중개사법 제4조에 따른 자격 취득 (자격번호: 41-2016-00559)
+                    </p>
+                </div>
+            </div>
+            <div class="credentials-grid">
+                <div class="credential-card">
+                    <img src="자격증.jpg" alt="공인중개사 자격증">
+                    <span class="title">국가공인 공인중개사 자격증</span>
+                    <p class="desc">정식으로 인정받은 국가공인 전문가로서, 모든 부동산 거래를 투명하고 안전하게 진행합니다.</p>
+                </div>
+                <div class="credential-card">
+                    <img src="슬라이드1.JPG" alt="디지털타임스 보도기사">
+                    <span class="title">언론이 주목하는 부동산 전문가 (디지털타임스)</span>
+                    <p class="desc">주요 언론사 인터뷰를 통해 빌딩 투자 및 시장 분석에 대한 전문성을 인정받았습니다.</p>
+                </div>
+                <div class="credential-card">
+                    <img src="슬라이드2.JPG" alt="브릿지경제 보도기사">
+                    <span class="title">경매 및 투자 전문성 (브릿지경제)</span>
+                    <p class="desc">경매를 통한 부동산 투자의 핵심과 성공 전략에 대한 심층적인 분석을 제공 언론기사.</p>
+                </div>
+                <div class="credential-card">
+                    <img src="권위.png" alt="권위 리본 ">
+                    <span class="title">오랜 실무 경력과 높은 거래 가액</span>
+                    <p class="desc">10년 이상의 실무 경력과 2,000억 이상의 누적 거래 가액으로 검증된 전문성을 자랑합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="inner-section reveal">
+        <h2 class="text-center">이제 집현전이 당신의<br><span class="highlight">'내 집 마련 동행자'</span>가 되어드립니다</h2>
+        <div class="process-card">
+            <h3>01. [선(先) 판단 서비스]: 데이터 분석</h3>
+            <p>단순히 사라 마라가 아닙니다. 당신의 소득, 부채, 가족 계획을 분석하여 해당 단지가 당신에게 '약'이 될지 '독'이 될지 냉정하게 판별합니다.</p>
+        </div>
+        <div class="process-card">
+            <h3>02. [현장 동행 계약]: 리스크 필터링</h3>
+            <p>전문 직원이 계약 현장에 동행합니다. 영업사원의 화법 뒤에 숨겨진 치명적 리스크를 대신 걸러드리고, 가장 유리한 조건으로 계약하도록 지킵니다.</p>
+        </div>
+        <div class="process-card">
+            <h3>03. [계약 후 스페셜 케어]: 사후 관리</h3>
+            <p>입주까지 지속적인 케어는 물론, 세무 상담 등 특별한 혜택을 제공합니다. 시장 모니터링을 통해 입주 시점까지 관리를 반복합니다. 프리미엄 받고 전매시 해당절차등도 진행해 드립니다.</p>
+        </div>
+    </section>
+
+    <section class="inner-section faq-box reveal" style="padding: 50px;">
+        <div class="faq-q">"동행 서비스, 정말 효과가 있을까요?"</div>
+        <p style="color: #ffffff; line-height: 1.8; margin-bottom: 0;">
+            효과는 확실합니다. <strong style="color: #ffffff; font-weight: bold;">헬스장에 PT가 있듯이, 내 집 마련도 전담 직원의 관리 속에서 체계적으로 진행해야 성과가 납니다.</strong>
+        </p>
+    </section>
+
+    <section class="inner-section reveal" style="padding-top: 60px; border-bottom: none;">
+        <h3 class="text-center" style="margin-bottom:30px;">🏠 서비스 신청 및 특별 혜택 안내</h3>
+        <div class="step-container">
+            <div class="step-box">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>업무 위탁 계약서 온라인 작성</h3>
+                    <p>투명한 중개와 책임 있는 동행의 첫 걸음입니다.</p>
+                </div>
+            </div>
+            <div class="step-box">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>시장 정보 및 데이터 상담 서비스</h3>
+                    <p>빅데이터를 통해 선별한 상위 1% 옥석 단지를 공개합니다.</p>
+                </div>
+            </div>
+            <div class="step-box">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>모델하우스 및 현장 동행</h3>
+                    <p>담당직원이 직접 모델하우스나 현장에 동행하여 리스크를 분석합니다.</p>
+                </div>
+            </div>
+            <div class="step-box">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>입주 시까지 무한 케어</h3>
+                    <p>계약으로 끝나지 않습니다. 안전하게 입주할 때까지 반복 관리해 드립니다.</p>
+                </div>
+            </div>
+        </div>
+
+
+<div class="book-info-block text-center reveal" style="margin-top: 60px; margin-bottom: 60px;">
+            <h2 style="font-size: 2rem; color: var(--primary); margin-bottom: 25px;">
+                💡 <span class="highlight">이광철 대표의 전자책 요약집</span> 증정 이벤트 💡
+            </h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; max-width: 700px; margin: 0 auto; background: #fdfbf7; padding: 30px; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <img src="북커버.jpg" alt="공인중개사가 알려주는 오르는 아파트는 따로 있다 북커버" 
+                     style="width: 180px; height: auto; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+                <div style="text-align: left; flex: 1; min-width: 250px;">
+                    <h3 style="font-size: 1.6rem; color: var(--primary); margin-bottom: 10px;">
+                        공인중개사가 알려주는 <br>오르는 아파트는 따로 있다
+                    </h3>
+                    <p style="font-size: 1.1rem; color: #475569; line-height: 1.6; margin-bottom: 0;">
+                        집 살 때 집부터 보지 마세요. <br>
+                        <strong style="color: var(--accent);">체크리스트 특별 제공!</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="benefit-highlight-box">
+            <div class="benefit-tag">LIMITED</div>
+            <span class="limit-text">⚠️ <span id="current-week"></span> 선착순 5명 한정 패키지</span>
+            <h2 style="color: #fff; margin-bottom: 10px; font-size:1.8rem;">오늘 상담 신청 시 특별 혜택</h2>
+            <ul class="benefit-list">
+                <li><strong>[증정]</strong> 공인중개사가 알려주는 오르는 아파트는 따로 있다 요약집 (PDF)</li>
+                <li><strong>[무상]</strong> 이광철 대표의 전담 자산 관리 로드맵 수립</li>
+                <li><strong>[우선]</strong> 급매물 및 로열층 미계약분 실시간 알림 서비스</li>
+            </ul>
+            <div class="timer-area">
+                현재 <span style="color:#ef4444; font-size:1.4rem;">남은 인원: <span class="blink">2명</span></span> | 
+                마감까지: <span id="countdown" style="color:var(--accent);">00:00:00</span> 남음
+            </div>
+        </div>
+    </section>
+
+    <div class="down-arrow text-center">↓</div>
+
+    <section id="apply" class="inner-section reveal" style="border-bottom:none; padding-top: 10px;">
+        <div class="form-wrap">
+            <h2 class="text-center">무료 상담 신청</h2>
+ 
+
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMBu0cw855YA2ReFMjxfQ/formResponse" 
+      method="POST" 
+      target="hidden_iframe" 
+      id="gForm">
+    
+    <div class="form-group">
+        <label>성함</label>
+        <input type="text" name="entry.1691236141" placeholder="성함을 입력해주세요" required>
+    </div>
+    
+    <div class="form-group">
+        <label>연락처</label>
+        <input type="tel" name="entry.1017849156" placeholder="010-0000-0000" required>
+    </div>
+    
+    <div class="form-group">
+        <label>관심 단지/지역</label>
+        <input type="text" name="entry.1233075841" placeholder="예: 김포 해링턴 플레이스 풍무, 신축 분양 등">
+    </div>
+    
+    <div class="form-group">
+        <label>가용 자금 범위</label>
+        <select name="entry.1086036814">
+            <option value="1억 이하">1억 이하</option>
+            <option value="1억 ~ 3억">1억 ~ 3억</option>
+            <option value="3억 ~ 5억">3억 ~ 5억</option>
+            <option value="5억 이상">5억 이상</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>상담 희망 내용</label>
+        <textarea name="entry.1098555819" rows="5" placeholder="현재 가장 고민되는 부분을 적어주세요."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label style="display:block; font-weight:bold; margin-bottom:8px;">개인정보 수집 및 이용 동의</label>
+        <div class="privacy-box">
+            상담 안내 및 서비스 제공을 위해 아래와 같이 최소한의 개인정보를 수집하며, 목적 외 사용이나 제3자 제공은 없습니다.<br><br>
+            <strong>1. 개인정보의 수집 이용 목적:</strong> 파일 링크 전송 및 상담 안내<br>
+            <strong>2. 수집하는 개인정보의 항목:</strong> 성함, 연락처, 관심지역, 가용자금, 상담내용<br>
+            <strong>3. 보유 및 이용 기간:</strong> 개인정보의 수집·이용 목적 달성시까지, 또는 고객이 자신의 개인정보제공의 동의를 철회한 때. 단, 관련 법령의 규정에 의하여 개인정보를 보유할 필요가 있는 경우, 해당 법령에서 정한 기간까지.<br>
+            <strong>4. 동의 거부권:</strong> 본 이벤트 참여 고객은 개인정보 수집, 활용에 대하여 동의를 거부할 권리가 있으며, 비동의 시 신청이 정상적으로 접수 되지 않습니다.
+동의하시는 경우, 체크박스를 클릭해주십시오
+        </div>
+        <label class="privacy-agree">
+            <input type="checkbox" id="agree_chk" required> <span>체크박스로 동의합니다</span>
+        </label>
+    </div>
+
+    <button type="submit" id="submit_btn" class="btn-submit" disabled>무료 상담 신청하기</button>
+</form>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('집현전에서 전담 직원을 배정 중입니다.'); location.reload();}"></iframe>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="container text-center">
+        <p style="font-weight:900; font-size:1.5rem; color:var(--accent); margin-bottom:10px;">CH집현전</p>
+        <p>© 2026 CH집현전. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    var submitted = false;
+    document.getElementById('gForm').onsubmit = function() { submitted = true; };
+
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function getWeekOfMonth() {
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const date = now.getDate();
+        const week = Math.ceil(date / 7);
+        const el = document.getElementById('current-week');
+        if(el) el.innerText = `${month}월 ${week}주차`;
+    }
+    getWeekOfMonth();
+
+    function startTimer() {
+        const countdownEl = document.getElementById('countdown');
+        if(!countdownEl) return;
+        setInterval(() => {
+            const now = new Date();
+            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const diff = tomorrow - now;
+            const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+            const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+            const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+            countdownEl.innerText = `${hours}:${minutes}:${seconds}`;
+        }, 1000);
+    }
+    startTimer();
+
+// 체크박스 상태에 따라 버튼 활성화/비활성화 제어
+const agreeChk = document.getElementById('agree_chk');
+const submitBtn = document.getElementById('submit_btn');
+
+agreeChk.addEventListener('change', function() {
+    if (this.checked) {
+        submitBtn.disabled = false;
+    } else {
+        submitBtn.disabled = true;
+    }
+});
+
+</script>
+
+</body>
+</html>
