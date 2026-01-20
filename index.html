@@ -139,6 +139,37 @@
 .privacy-agree input { width: 20px; height: 20px; cursor: pointer; }
 .btn-submit:disabled { background: #cbd5e1; cursor: not-allowed; }
 
+/* 입력 필드 간격 확보 */
+.field {
+  display: block;
+  margin-bottom: 18px;   /* 입력칸 사이 간격 */
+}
+
+/* 입력칸 높이 조절 */
+.field input,
+.field textarea {
+  padding: 10px 12px;    /* 높이 ↓ */
+  line-height: 1.4;      /* 글자 밀도 정상화 */
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+/* textarea는 조금 넉넉하게 */
+.field textarea {
+  min-height: 120px;
+}
+
+/* 개인정보 박스와 입력칸 사이 간격 */
+.form-group {
+  margin-top: 24px;
+}
+
+/* 버튼 위 여백 */
+.btn-submit {
+  margin-top: 28px;
+}
+
+
     </style>
 </head>
 <body>
