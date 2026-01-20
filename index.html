@@ -46,7 +46,7 @@
         .slogan-box p { margin-bottom: 0; color: #fff; font-size: clamp(1rem, 3vw, 1.3rem); }
 
         .problem-block { background: var(--bg-light); border-radius: 30px; padding: 40px; margin-bottom: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 20px rgba(0,0,0,0.03); }
-        .img-area { width: 100%; height: 400px; background: #f1f5f9; border-radius: 15px; margin-bottom: 20px; overflow: hidden; position: relative; }
+        .img-area { width: 100%; height: auto; min-height: 200px; background: #f1f5f9; border-radius: 15px; margin-bottom: 20px; overflow: hidden; position: relative; }
         .img-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         /* 화살표 간격: 너무 좁지도 넓지도 않게 조정 (상하 30px) */
@@ -178,6 +178,8 @@
             h1 { font-size: 1.8rem; }
             .form-wrap { padding: 25px; box-shadow: 10px 10px 0 var(--accent); }
             .profile-img { width: 180px; height: 230px;}
+            .img-area { height: auto; }
+            .authority-box { padding: 30px 20px; }
         }
 
 .privacy-box { 
@@ -261,7 +263,7 @@
 
 @keyframes bump {
   0%   { transform: scale(1); }
-  50%  { transform: scale(1.08); }
+  50%   { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
@@ -382,7 +384,7 @@
 이른 아침부터 모여 크루를 따라 현장을 돌고,  
 입지 설명과 호재 이야기를 메모합니다.  
 하지만 강사는 당신의 자산 구조도,  
-당신이 감당할 수 있는 리스크도 알지 못합니다.  
+당신의 감당할 수 있는 리스크도 알지 못합니다.  
 <br><br>
 모두에게 “괜찮은 입지”가  
 <strong>당신 인생에 맞는 선택이라는 보장은 없습니다.</strong>  
@@ -784,6 +786,37 @@ action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMB
     }
     startTimer();
 
+    function startStatsCounter() {
+        const statElements = document.querySelectorAll('.val[data-count]');
+        
+        function runCounter() {
+            statElements.forEach(el => {
+                const target = parseInt(el.getAttribute('data-count'));
+                let current = 0;
+                const duration = 1500;
+                const increment = target / (duration / 16);
+
+                function update() {
+                    current += increment;
+                    if (current < target) {
+                        el.innerText = Math.floor(current);
+                        requestAnimationFrame(update);
+                    } else {
+                        el.innerText = target;
+                    }
+                }
+                update();
+            });
+
+            setTimeout(() => {
+                statElements.forEach(el => el.innerText = '0');
+                runCounter();
+            }, 3500);
+        }
+        runCounter();
+    }
+    startStatsCounter();
+
 function validateForm() {
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
@@ -791,102 +824,18 @@ function validateForm() {
     const budget = document.getElementById('budget').value.trim();
     const agree = document.getElementById('agree_chk').checked;
 
-    if (!name) { alert('성함을 입력해주세요.'); return false; }
-    if (!phone) { alert('연락처를 입력해주세요.'); return false; }
-    if (!interest) { alert('관심 단지/지역을 입력해주세요.'); return false; }
-    if (!budget) { alert('가용 자금 범위를 입력해주세요.'); return false; }
-    if (!agree) { alert('개인정보 수집 및 이용에 동의하셔야 신청이 가능합니다.'); return false; }
-
+    if(!name || !phone || !interest || !budget) { alert('필수 항목을 모두 입력해주세요.'); return false; }
+    if(!agree) { alert('개인정보 동의가 필요합니다.'); return false; }
     submitted = true;
     return true;
 }
 
-function formatPhoneNumber(target) {
-    let val = target.value.replace(/\D/g, "");
-    let length = val.length;
-    let result = "";
-
-    if (length < 4) {
-        result = val;
-    } else if (length < 7) {
-        result = val.substring(0, 3) + "-" + val.substring(3);
-    } else if (length < 11) {
-        result = val.substring(0, 3) + "-" + val.substring(3, 6) + "-" + val.substring(6);
-    } else {
-        result = val.substring(0, 3) + "-" + val.substring(3, 7) + "-" + val.substring(7);
-    }
-    target.value = result;
+function formatPhoneNumber(el) {
+    let val = el.value.replace(/[^0-9]/g, '');
+    if (val.length > 3 && val.length <= 7) el.value = val.slice(0, 3) + '-' + val.slice(3);
+    else if (val.length > 7) el.value = val.slice(0, 3) + '-' + val.slice(3, 7) + '-' + val.slice(7, 11);
+    else el.value = val;
 }
-
 </script>
-
-
-
-<script>
-  let slotStarted = false;
-
-  function startSlotMachineLoop() {
-    const els = document.querySelectorAll('.val[data-count]');
-    const items = [];
-
-    els.forEach(el => {
-      items.push({
-        el,
-        final: parseInt(el.dataset.count, 10)
-      });
-    });
-
-    function run() {
-      const duration = 1200;
-      const start = performance.now();
-
-      function animate(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out
-
-        items.forEach(item => {
-          const value = Math.floor(item.final * eased);
-          item.el.textContent = value.toLocaleString();
-        });
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          // 숫자 도착 시 살짝 튀는 효과
-          items.forEach(item => {
-            item.el.classList.add('bump');
-            setTimeout(() => item.el.classList.remove('bump'), 350);
-          });
-
-          // 2초 멈췄다가 다시
-          setTimeout(run, 2000);
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    run();
-  }
-
-  /* 🔍 슬롯 숫자 영역이 화면에 들어오면 시작 */
-  const slotObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !slotStarted) {
-        slotStarted = true;
-        startSlotMachineLoop();
-      }
-    });
-  }, { threshold: 0.4 });
-
-  /* 🎯 바로 여기 */
-  const target = document.querySelector('.auth-ribbon');
-  if (target) {
-    slotObserver.observe(target);
-  }
-</script>
-
-
-
 </body>
 </html>
