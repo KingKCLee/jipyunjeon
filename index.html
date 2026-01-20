@@ -380,39 +380,54 @@
             <h2 class="text-center">무료 상담 신청</h2>
  
 
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSdDZdWBvKI4tafxya0S3cxzRUBORnMBu0cw855YA2ReFMjxfQ/formResponse" 
+<form action="https://docs.google.com/forms/d/e/156rSxctRODGaTkw2Yjv7fAhjRoWdaSqqM-9XRe566og/formResponse" 
       method="POST" 
       target="hidden_iframe" 
       id="gForm">
-    
+
+    <!-- 성함 -->
     <div class="form-group">
         <label>성함</label>
-        <input type="text" name="entry.1691236141" placeholder="성함을 입력해주세요" required>
+        <input type="text"
+               name="entry.1772812"
+               placeholder="성함을 입력해주세요"
+               required>
     </div>
-    
+
+    <!-- 연락처 -->
     <div class="form-group">
         <label>연락처</label>
-        <input type="tel" name="entry.1017849156" placeholder="010-0000-0000" required>
+        <input type="tel"
+               name="entry.1645367330"
+               placeholder="010-0000-0000"
+               required>
     </div>
-    
+
+    <!-- 관심 단지/지역 -->
     <div class="form-group">
         <label>관심 단지/지역</label>
-        <input type="text" name="entry.1233075841" placeholder="예: 김포 해링턴 플레이스 풍무, 신축 분양 등">
+        <input type="text"
+               name="entry.557923641"
+               placeholder="예: 김포 해링턴 플레이스 풍무, 신축 분양 등">
     </div>
-    
+
+    <!-- 가용 자금 범위 -->
     <div class="form-group">
         <label>가용 자금 범위</label>
-        <select name="entry.1086036814">
+        <select name="entry.1996006477">
             <option value="1억 이하">1억 이하</option>
             <option value="1억 ~ 3억">1억 ~ 3억</option>
             <option value="3억 ~ 5억">3억 ~ 5억</option>
             <option value="5억 이상">5억 이상</option>
         </select>
     </div>
-    
+
+    <!-- 상담 희망 내용 -->
     <div class="form-group">
         <label>상담 희망 내용</label>
-        <textarea name="entry.1098555819" rows="5" placeholder="현재 가장 고민되는 부분을 적어주세요."></textarea>
+        <textarea name="entry.1934433179"
+                  rows="5"
+                  placeholder="현재 가장 고민되는 부분을 적어주세요."></textarea>
     </div>
 
     <div class="form-group">
@@ -433,7 +448,7 @@
     <button type="submit" id="submit_btn" class="btn-submit" disabled>무료 상담 신청하기</button>
 </form>
 
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('집현전에서 전담 직원을 배정 중입니다.'); location.reload();}"></iframe>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {alert('접수가 완료되었습니다. 집현전에서 전담 직원을 배정중입니다. 현재 많은 접수가 되어 상담이 늦어질수 있습니다. '); location.reload();}"></iframe>
         </div>
     </section>
 </div>
