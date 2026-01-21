@@ -171,16 +171,33 @@
 
         footer { background: var(--primary); color: #fff; padding: 60px 20px; text-align: center; }
 
-        @media (max-width: 768px) {
-            .profile-area { flex-direction: column; align-items: center; text-align: center; }
-            .credentials-grid { grid-template-columns: 1fr; }
-            .auth-ribbon { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-            h1 { font-size: 1.8rem; }
-            .form-wrap { padding: 25px; box-shadow: 10px 10px 0 var(--accent); }
-            .profile-img { width: 180px; height: 230px;}
-            .img-area { height: auto; }
-            .authority-box { padding: 30px 20px; }
-        }
+@media (max-width: 768px) {
+    /* 1. 히어로 섹션 높이 및 위치 수정 */
+    .hero {
+        height: 320px !important; /* 전체 높이를 320px로 축소 */
+        min-height: 320px !important;
+    }
+    .hero-content {
+        padding: 40px 20px !important; /* 내부 여백을 줄여 글자를 위로 올림 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 텍스트를 세로 중앙 정렬 */
+        height: 100%;
+    }
+    .hero-content h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 15px !important; 
+    }
+
+    /* 2. 기존 모바일 스타일 유지 */
+    .profile-area { flex-direction: column; align-items: center; text-align: center; }
+    .credentials-grid { grid-template-columns: 1fr; }
+    .auth-ribbon { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-wrap { padding: 25px; box-shadow: 10px 10px 0 var(--accent); }
+    .profile-img { width: 180px; height: 230px;}
+    .img-area { height: auto; }
+    .authority-box { padding: 30px 20px; }
+}
 
 .privacy-box { 
     background: #f8fafc; 
