@@ -311,16 +311,56 @@
   color: #9ca3af;
 }
 
+/* 메뉴바 스타일 */
+.top-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; 
+    background: rgba(0, 0, 0, 0.4); 
+    padding: 12px 0;
+}
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+.top-nav a { color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+.nav-tel { font-weight: 900 !important; color: var(--accent) !important; }
+
+/* 기존 타이틀(실패없는...) 위치 조절 */
+.hero-content {
+    position: relative;
+    z-index: 5;
+    padding-top: 100px !important; /* 메뉴바 두께만큼 위에서 띄워줌 */
+}
+
     </style>
 </head>
 <body>
 
 <header class="hero">
-  <video class="hero-video"
-         autoplay
-         muted
-         loop
-         playsinline>
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="#">집현전 동행서비스</a>
+      <span class="sep">|</span>
+      <a href="https://www.youtube.com/@집현전" target="_blank">유튜브 집현전채널</a>
+      <span class="sep">|</span>
+      <a href="https://search.naver.com/search.naver?query=상상공인중개사" target="_blank">집현전 진행분양현장</a>
+      <span class="sep">|</span>
+      <a href="#faq-section">FAQ</a>
+      <span class="sep">|</span>
+      <a href="tel:1533-9077" class="nav-tel">T.1533-9077</a>
+    </div>
+  </nav>
+
+  <video class="hero-video" autoplay muted loop playsinline>
     <source src="sseoul.mp4" type="video/mp4">
   </video>
 
@@ -336,7 +376,6 @@
     </div>
   </div>
 </header>
-
 
 <div class="container">
     <section class="inner-section text-center reveal">
