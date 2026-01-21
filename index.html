@@ -311,34 +311,50 @@
   color: #9ca3af;
 }
 
-/* 메뉴바 스타일 */
+/* 상단 메뉴 좌우 배치 스타일 */
 .top-nav {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100; 
+    z-index: 100;
     background: rgba(0, 0, 0, 0.4); 
-    padding: 12px 0;
+    padding: 15px 0;
 }
+
 .nav-container {
-    max-width: 1100px;
+    max-width: 1100px; /* 전체 너비 설정 */
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* 좌우 끝으로 배치 */
     align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    padding: 0 10px;
+    padding: 0 24px; /* 양옆 여백 */
 }
-.top-nav a { color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
-.nav-tel { font-weight: 900 !important; color: var(--accent) !important; }
 
-/* 기존 타이틀(실패없는...) 위치 조절 */
-.hero-content {
-    position: relative;
-    z-index: 5;
-    padding-top: 100px !important; /* 메뉴바 두께만큼 위에서 띄워줌 */
+.top-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700; /* 조금 더 굵게 설정 */
+    transition: color 0.3s;
+}
+
+.nav-tel {
+    color: var(--accent) !important;
+}
+
+.top-nav a:hover {
+    opacity: 0.8;
+}
+
+/* 모바일 전용 조정 */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 15px; /* 모바일에서는 여백을 조금 줄임 */
+    }
+    .top-nav a {
+        font-size: 0.85rem; /* 모바일 폰트 크기 조정 */
+    }
 }
 
     </style>
@@ -348,15 +364,8 @@
 <header class="hero">
   <nav class="top-nav">
     <div class="nav-container">
-      <a href="#">집현전 동행서비스</a>
-      <span class="sep">|</span>
-      <a href="https://www.youtube.com/@CH집현전" target="_blank">유튜브 집현전채널</a>
-      <span class="sep">|</span>
-      <a href="https://oneroom129.sswebplus.org" target="_blank">집현전 진행분양현장</a>
-      <span class="sep">|</span>
-      <a href="#faq-section">FAQ</a>
-      <span class="sep">|</span>
-      <a href="tel:1533-9077" class="nav-tel">T.1533-9077</a>
+      <a href="#" class="nav-left">집현전 동행서비스</a>
+      <a href="tel:1533-9077" class="nav-right nav-tel">T.1533-9077</a>
     </div>
   </nav>
 
